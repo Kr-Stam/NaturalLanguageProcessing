@@ -29,7 +29,9 @@ def a(df):
     vocabulary = Vocabulary(words, 1)
 
     # Vocabulary count returns a Collections.Counter object that has the counts of every word
-    print('Word counts: ' + str(vocabulary.counts))
+    # print('Word counts: ' + str(vocabulary.counts))
+    # Total count of diferent words
+    print('There are this many words in the vocabulary: ' + str(len(vocabulary.counts.keys())))
 
     data = vocabulary.counts.most_common(10)
 
@@ -57,7 +59,10 @@ def b(df):
          ]
     filtered_vocabulary = Vocabulary(filtered_words, 1)
 
-    print('Word counts of filtered vocabulary: ' + str(filtered_vocabulary.counts))
+    # print('Word counts of filtered vocabulary: ' + str(filtered_vocabulary.counts))
+
+    # Total count of diferent words
+    print('There are this many words in the filtered vocabulary: ' + str(len(filtered_vocabulary.counts.keys())))
 
     data1 = filtered_vocabulary.counts.most_common(10)
 
@@ -114,17 +119,29 @@ def c(df):
 
     fig.show()
 
+    # Total count of diferent words
+    print('There are this many words in the stemmed vocabulary: ' + str(len(stemmed_vocabulary.counts.keys())))
+
+    # Total count of diferent words
+    print('There are this many words in the lemmatized vocabulary: ' + str(len(lemmatized_vocabulary.counts.keys())))
+
 
 if __name__ == '__main__':
     politeness = pd.read_csv("train_en.txt", sep='\t')
     politeness['word_token'] = politeness['Sentence'].apply(word_tokenize)
 
-    print('Choose A, B or C for Problem 1')
-    option = input()
-    if option.lower() == 'a':
-        a(politeness)
-    elif option.lower() == 'b':
-        b(politeness)
-    elif option.lower() == 'c':
-        c(politeness)
-    c(politeness)
+
+    while True:
+        print('Choose A, B or C for Problem 1')
+        print('Enter exit to exit')
+        option = input()
+        if option.lower() == 'a':
+            a(politeness)
+        elif option.lower() == 'b':
+            b(politeness)
+        elif option.lower() == 'c':
+            c(politeness)
+        elif option.lower() == 'exit':
+            break
+        else:
+            print("Please choose a valid option")
