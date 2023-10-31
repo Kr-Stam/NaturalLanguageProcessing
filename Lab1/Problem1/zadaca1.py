@@ -38,7 +38,8 @@ def a(df):
     # COMMENTED OUT
     bar = px.bar(
         x=[x for (x, y) in data],
-        y=[y for (x, y) in data]
+        y=[y for (x, y) in data],
+        title='Analysis of words in the vocabulary'
     )
 
     bar.show()
@@ -70,7 +71,8 @@ def b(df):
     # Ne znam zosto ne mi go prikazhuva bagnato e izgleda
     bar = px.bar(
         x=[x for (x, y) in data1],
-        y=[y for (x, y) in data1]
+        y=[y for (x, y) in data1],
+        title='Analysis of words in the filtered vocabulary'
     )
 
     bar.show()
@@ -97,22 +99,24 @@ def c(df):
     stemmed_vocabulary = Vocabulary(stemmed_words)
     datas = stemmed_vocabulary.counts.most_common(10)
 
-    fig = make_subplots(rows=1, cols=2)
+    fig = make_subplots(rows=1, cols=2, subplot_titles=['Analysis of the stemmed vocabulary', 'Analysis of the lemmatized vocabulary'])
 
+    fig1 = go.Bar(
+        x=[x for (x, y) in datas],
+        y=[y for (x, y) in datas]
+    )
     fig.add_trace(
-        go.Bar(
-            x=[x for (x, y) in datas],
-            y=[y for (x, y) in datas]
-        ),
+        fig1,
         row=1,
         col=1
     )
 
+    fig2 = go.Bar(
+        x=[x for (x, y) in datal],
+        y=[y for (x, y) in datal],
+    )
     fig.add_trace(
-        go.Bar(
-            x=[x for (x, y) in datal],
-            y=[y for (x, y) in datal]
-        ),
+        fig2,
         row=1,
         col=2
     )
@@ -129,7 +133,6 @@ def c(df):
 if __name__ == '__main__':
     politeness = pd.read_csv("train_en.txt", sep='\t')
     politeness['word_token'] = politeness['Sentence'].apply(word_tokenize)
-
 
     while True:
         print('Choose A, B or C for Problem 1')

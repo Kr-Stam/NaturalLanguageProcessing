@@ -28,7 +28,11 @@ def a():
 
     while True:
         print("Enter positive and negative words to find the most similar word")
-        pos_words = input("\tEnter positive words\n").split(' ')
+        print("Enter exit to return to main menu")
+        pos_words = input("\tEnter positive words\n")
+        if pos_words == 'exit':
+            break
+        pos_words = pos_words.split(' ')
         neg_words = input("\tEnter negative words\n").split(' ')
 
         if neg_words == ['']:
@@ -72,17 +76,16 @@ def b():
 
 if __name__ == '__main__':
 
-    option = input()
-
     while True:
         print("Choose A or B for Problem2")
         print("Enter exit to exit")
+        option = input()
         if option.lower() == 'a':
             a()
         elif option.lower() == 'b':
             b()
         elif option.lower() == 'exit':
-            break;
+            break
         else:
             print("Please choose a valid option")
 
